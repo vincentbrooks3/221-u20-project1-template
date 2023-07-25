@@ -38,9 +38,24 @@ window.addEventListener("load", () => {
 function displayItem(currentStories) {
    let feed = document.getElementById('newsfeed');
    feed.innerHTML += "<spam><img class='myImage' src ='"+ currentStories.imageUrl +"'>" + "</spam>";
-   feed.innerHTML += "<spam><h2><a href= '" + currentStories.linkUrl + "'> " + currentStories.Title + "</a href>";
+   feed.innerHTML += "<spam><h2><a href= '" + currentStories.linkUrl + "'> " + currentStories.Title + "</a></h2></span>";
    feed.innerHTML += "<p>" + currentStories.Body + "</p>";
    feed.innerHTML += "<hr />";
 }
 
+function getCurrentFeed(){
+    fetch("./api/feedItems").then(function(response){
+        if (response.status !== 200) {
+            console.log('problem with ajax call..' + response.status + 'msg:' + response.value);
+            return;
+        }
+        response.json().then(function(date){
+            var feedItemHtml = '<ol>';
+            for(i in data) {
+                displayFeed(data[i]);
+            }
+        });
+    });
+}
 
+getCurrentFeed();
